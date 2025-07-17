@@ -1,11 +1,9 @@
-import IonIcon from "@reacticons/ionicons";
-
 export default function NavBar() {
     return (
         <div class="navbar">
             <div class="container">
                 <div class="logo">
-                    <IonIcon name="logo-instagram"/>
+                    <ion-icon name="logo-instagram"/>
                     <div class="separador"></div>
                     <img src="assets/img/logo.png" alt="logo" />
                 </div>
@@ -15,14 +13,14 @@ export default function NavBar() {
                 </div>
 
                 <div class="icones">
-                    <IonIcon name="paper-plane-outline"/>
-                    <IonIcon name="compass-outline"></IonIcon>
-                    <IonIcon name="heart-outline"></IonIcon>
-                    <IonIcon name="person-outline"></IonIcon>
+                    <ion-icon name="paper-plane-outline"/>
+                    <ion-icon name="compass-outline"></ion-icon>
+                    <ion-icon name="heart-outline"></ion-icon>
+                    <ion-icon name="person-outline"></ion-icon>
                 </div>
 
                 <div class="icones-mobile">
-                    <IonIcon name="paper-plane-outline"></IonIcon>
+                    <ion-icon name="paper-plane-outline"></ion-icon>
                 </div>
             </div>
         </div>
