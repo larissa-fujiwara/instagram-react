@@ -23,7 +23,6 @@ function SalvarPost() {
     function salvarPublicacao(){
         const novoEstado = inverteEstado(estado);
         setEstado(novoEstado);
-        console.log(novoEstado);
 
     }
 
