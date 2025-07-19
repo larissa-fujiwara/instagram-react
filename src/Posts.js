@@ -2,14 +2,14 @@ import React from "react";
 
 export default function Posts() {
     const posts = [
-        { imgUsuario: "assets/img/meowed.svg", usuario: "meowed", imgPost: "assets/img/gato-telefone.svg", imgPerfilCurtido: "assets/img/respondeai.svg", usuarioCurtido: "respondeai" },
-        { imgUsuario: "assets/img/barked.svg", usuario: "barked", imgPost: "assets/img/dog.svg", imgPerfilCurtido: "assets/img/adorable_animals.svg", usuarioCurtido: "adorable_animals" },
-        { imgUsuario: "assets/img/kiki.jpeg", usuario: "ghibli", imgPost: "assets/img/Totoro.jpg", imgPerfilCurtido: "assets/img/adorable_animals.svg", usuarioCurtido: "adorable_animals" }
+        { imgUsuario: "assets/img/meowed.svg", usuario: "meowed", altUsuario:"meowed", imgPost: "assets/img/gato-telefone.svg", altPost:"gato-telefone"},
+        { imgUsuario: "assets/img/barked.svg", usuario: "barked", altUsuario:"barked", imgPost: "assets/img/dog.svg", altPost:"dog"},
+        { imgUsuario: "assets/img/kiki.jpeg", usuario: "ghibli", altUsuario:"ghibli", imgPost: "assets/img/Totoro.jpg", altPost:"totoro"}
     ]
 
     return (
         <div class="posts">
-            {posts.map(post => <Post imgUsuario={post.imgUsuario} usuario={post.usuario} imgPost={post.imgPost} imgPerfilCurtido={post.imgPerfilCurtido} usuarioCurtido={post.usuarioCurtido} />)}
+            {posts.map(post => <Post imgUsuario={post.imgUsuario} usuario={post.usuario} altUsuario={post.altUsuario} imgPost={post.imgPost} altPost={post.altPost} />)}
 
         </div>
     );
@@ -36,13 +36,17 @@ function SalvarPost() {
     )
 }
 
+function CurtirPost(){
+
+}
+
 function Post(props) {
 
     return (
         <div class="post">
             <div class="topo">
                 <div class="usuario">
-                    <img src={props.imgUsuario} alt="meowed" />
+                    <img src={props.imgUsuario} alt={props.altUsuario} />
                     {props.usuario}
                 </div>
                 <div class="acoes">
@@ -51,7 +55,7 @@ function Post(props) {
             </div>
 
             <div class="conteudo">
-                <img src={props.imgPost} alt="gato-telefone" />
+                <img src={props.imgPost} alt={props.altPost} />
             </div>
 
             <div class="fundo">
@@ -67,9 +71,9 @@ function Post(props) {
                 </div>
 
                 <div class="curtidas">
-                    <img src={props.imgPerfilCurtido} alt="respondeai" />
+                    <img src="assets/img/adorable_animals.svg" alt="adorable_animals" />
                     <div class="texto">
-                        Curtido por <strong>{props.usuarioCurtido}</strong> e <strong>outras 101.523 pessoas</strong>
+                        Curtido por <strong>adorable_animals</strong> e <strong>outras 101.523 pessoas</strong>
                     </div>
                 </div>
             </div>
