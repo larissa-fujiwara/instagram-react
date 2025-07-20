@@ -2,81 +2,115 @@ import React from "react";
 
 export default function Posts() {
     const posts = [
-        { imgUsuario: "assets/img/meowed.svg", usuario: "meowed", altUsuario:"meowed", imgPost: "assets/img/gato-telefone.svg", altPost:"gato-telefone"},
-        { imgUsuario: "assets/img/barked.svg", usuario: "barked", altUsuario:"barked", imgPost: "assets/img/dog.svg", altPost:"dog"},
-        { imgUsuario: "assets/img/kiki.jpeg", usuario: "ghibli", altUsuario:"ghibli", imgPost: "assets/img/Totoro.jpg", altPost:"totoro"}
+        { imgUsuario: "assets/img/meowed.svg", altUsuario: "meowed", nomeUsuario: "meowed", imgPost: "assets/img/gato-telefone.svg", altPost: "gato-telefone", likes: 101523 },
+        { imgUsuario: "assets/img/barked.svg", altUsuario: "barked", nomeUsuario: "barked", imgPost: "assets/img/dog.svg", altPost: "dog", likes: 99159 },
+        { imgUsuario: "assets/img/kiki.jpeg", altUsuario: "ghibli", nomeUsuario: "ghibli", imgPost: "assets/img/Totoro.jpg", altPost: "totoro", likes: 20963 }
     ]
 
     return (
         <div class="posts">
-            {posts.map(post => <Post imgUsuario={post.imgUsuario} usuario={post.usuario} altUsuario={post.altUsuario} imgPost={post.imgPost} altPost={post.altPost} />)}
+            {posts.map(post =>
+                <div class="post">
+                    <TopoPost imgUsuario={post.imgUsuario} altUsuario={post.altUsuario} nomeUsuario={post.nomeUsuario} />
+                    <Conteudo imgPost={post.imgPost} altPost={post.altPost} likes={post.likes} />
+                </div>)}
 
         </div>
     );
 }
 
-function SalvarPost() {
 
-    const [estado, setEstado] = React.useState(false);
-
-       
-    function salvarPublicacao(){
-        const novoEstado = inverteEstado(estado);
-        setEstado(novoEstado);
-
-    }
-
-    function inverteEstado(estadoAtual){
-        const toggle = !estadoAtual;
-        return toggle;
-    }
-
+function TopoPost(props) {
     return (
-        <ion-icon onClick={salvarPublicacao} name={estado ? "bookmark-sharp" : "bookmark-outline"}></ion-icon>
+        <div class="topo">
+            <div class="usuario">
+                <img src={props.imgUsuario} alt={props.altUsuario} />
+                {props.nomeUsuario}
+            </div>
+            <div class="acoes">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+            </div>
+        </div>
     )
 }
 
-function CurtirPost(){
+function Conteudo(props) {
 
-}
+    const [curtir, setCurtir] = React.useState(false);
+    const [curtidas, setCurtidas] = React.useState(props.likes);
 
-function Post(props) {
+
+    function curtirPostImg() {
+        const estadoCurtir = alteraEstado(curtir);
+        if (estadoCurtir) {
+            setCurtir(estadoCurtir);
+            setCurtidas(curtidas + 1);
+        }
+
+    }
+
+    function curtirPostIcone() {
+        const estadoCurtirIcone = alteraEstado(curtir);
+        if (!estadoCurtirIcone) {
+            setCurtir(estadoCurtirIcone);
+            setCurtidas(curtidas - 1);
+        }else{
+            setCurtir(estadoCurtirIcone);
+            setCurtidas(curtidas + 1);
+        }
+    }
+
+
+    function alteraEstado(estado) {
+        const mudarEstado = !estado;
+        return mudarEstado;
+    }
 
     return (
-        <div class="post">
-            <div class="topo">
-                <div class="usuario">
-                    <img src={props.imgUsuario} alt={props.altUsuario} />
-                    {props.usuario}
-                </div>
-                <div class="acoes">
-                    <ion-icon name="ellipsis-horizontal"></ion-icon>
-                </div>
-            </div>
-
+        <>
             <div class="conteudo">
-                <img src={props.imgPost} alt={props.altPost} />
+                <img onClick={curtirPostImg} src={props.imgPost} alt={props.altPost} />
             </div>
 
             <div class="fundo">
                 <div class="acoes">
                     <div>
-                        <ion-icon name="heart-outline"></ion-icon>
+                        <ion-icon onClick={curtirPostIcone} name={curtir ? "heart-sharp" : "heart-outline"}></ion-icon>
                         <ion-icon name="chatbubble-outline"></ion-icon>
                         <ion-icon name="paper-plane-outline"></ion-icon>
                     </div>
                     <div>
-                        <SalvarPost />
+                        <ion-icon name="bookmark-outline"></ion-icon>
                     </div>
                 </div>
 
                 <div class="curtidas">
                     <img src="assets/img/adorable_animals.svg" alt="adorable_animals" />
                     <div class="texto">
-                        Curtido por <strong>adorable_animals</strong> e <strong>outras 101.523 pessoas</strong>
+                        Curtido por <strong>adorable_animals</strong> e <strong>outras {curtidas} pessoas</strong>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
+
+/* function AcaoFavoritar() {
+    const[favorito, setFavorito] = React.useState(false);
+    
+    function favoritarPost(){
+        const recebeFavorito = inverteValores(favorito);
+        setFavorito(recebeFavorito);
+        console.log(recebeFavorito);
+    }
+
+    return (
+        <ion-icon onClick={favoritarPost} name={favorito ? "bookmark-sharp" : "bookmark-outline"}></ion-icon>
+    )
+}
+
+
+
+function inverteValores(valorAtual){
+    return !valorAtual;
+} */
