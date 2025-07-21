@@ -38,6 +38,7 @@ function Conteudo(props) {
 
     const [curtir, setCurtir] = React.useState(false);
     const [curtidas, setCurtidas] = React.useState(props.likes);
+    const [salvar, setSalvar] = React.useState(false);
 
 
     function curtirPostImg() {
@@ -60,6 +61,11 @@ function Conteudo(props) {
         }
     }
 
+    function salvarPost(){
+        const estadoSalvo = alteraEstado(salvar);
+        setSalvar(estadoSalvo);
+    }
+
 
     function alteraEstado(estado) {
         const mudarEstado = !estado;
@@ -73,20 +79,20 @@ function Conteudo(props) {
             </div>
 
             <div class="fundo">
-                <div class="acoes">
+                <div className="acoes">
                     <div>
                         <ion-icon onClick={curtirPostIcone} name={curtir ? "heart-sharp" : "heart-outline"}></ion-icon>
                         <ion-icon name="chatbubble-outline"></ion-icon>
                         <ion-icon name="paper-plane-outline"></ion-icon>
                     </div>
                     <div>
-                        <ion-icon name="bookmark-outline"></ion-icon>
+                        <ion-icon onClick={salvarPost} name={salvar ? "bookmark-sharp" : "bookmark-outline"}></ion-icon>
                     </div>
                 </div>
 
                 <div class="curtidas">
                     <img src="assets/img/adorable_animals.svg" alt="adorable_animals" />
-                    <div class="texto">
+                    <div className="texto">
                         Curtido por <strong>adorable_animals</strong> e <strong>outras {curtidas} pessoas</strong>
                     </div>
                 </div>
