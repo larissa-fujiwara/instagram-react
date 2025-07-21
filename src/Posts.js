@@ -8,30 +8,19 @@ export default function Posts() {
     ]
 
     return (
-        <div class="posts">
-            {posts.map(post =>
-                <div class="post">
-                    <TopoPost imgUsuario={post.imgUsuario} altUsuario={post.altUsuario} nomeUsuario={post.nomeUsuario} />
-                    <Conteudo imgPost={post.imgPost} altPost={post.altPost} likes={post.likes} />
-                </div>)}
+        <div className="posts">
+            {posts.map((post, index) =>
+                <Conteudo imgUsuario={post.imgUsuario}
+                    altUsuario={post.altUsuario}
+                    nomeUsuario={post.nomeUsuario}
+                    imgPost={post.imgPost}
+                    altPost={post.altPost}
+                    likes={post.likes}
+                    key={index} />)
+            }
 
-        </div>
+        </div >
     );
-}
-
-
-function TopoPost(props) {
-    return (
-        <div class="topo">
-            <div class="usuario">
-                <img src={props.imgUsuario} alt={props.altUsuario} />
-                {props.nomeUsuario}
-            </div>
-            <div class="acoes">
-                <ion-icon name="ellipsis-horizontal"></ion-icon>
-            </div>
-        </div>
-    )
 }
 
 function Conteudo(props) {
@@ -42,9 +31,8 @@ function Conteudo(props) {
 
 
     function curtirPostImg() {
-        const estadoCurtir = alteraEstado(curtir);
-        if (estadoCurtir) {
-            setCurtir(estadoCurtir);
+        if (!curtir) {
+            setCurtir(true);
             setCurtidas(curtidas + 1);
         }
 
@@ -55,13 +43,13 @@ function Conteudo(props) {
         if (!estadoCurtirIcone) {
             setCurtir(estadoCurtirIcone);
             setCurtidas(curtidas - 1);
-        }else{
+        } else {
             setCurtir(estadoCurtirIcone);
             setCurtidas(curtidas + 1);
         }
     }
 
-    function salvarPost(){
+    function salvarPost() {
         const estadoSalvo = alteraEstado(salvar);
         setSalvar(estadoSalvo);
     }
@@ -73,12 +61,22 @@ function Conteudo(props) {
     }
 
     return (
-        <>
-            <div class="conteudo">
+        <div className="post">
+
+            <div className="topo">
+                <div className="usuario">
+                    <img src={props.imgUsuario} alt={props.altUsuario} />
+                    {props.nomeUsuario}
+                </div>
+                <div className="acoes">
+                    <ion-icon name="ellipsis-horizontal"></ion-icon>
+                </div>
+            </div>
+            <div className="conteudo">
                 <img onClick={curtirPostImg} src={props.imgPost} alt={props.altPost} />
             </div>
 
-            <div class="fundo">
+            <div className="fundo">
                 <div className="acoes">
                     <div>
                         <ion-icon onClick={curtirPostIcone} name={curtir ? "heart-sharp" : "heart-outline"}></ion-icon>
@@ -90,33 +88,13 @@ function Conteudo(props) {
                     </div>
                 </div>
 
-                <div class="curtidas">
+                <div className="curtidas">
                     <img src="assets/img/adorable_animals.svg" alt="adorable_animals" />
                     <div className="texto">
                         Curtido por <strong>adorable_animals</strong> e <strong>outras {curtidas} pessoas</strong>
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
-
-/* function AcaoFavoritar() {
-    const[favorito, setFavorito] = React.useState(false);
-    
-    function favoritarPost(){
-        const recebeFavorito = inverteValores(favorito);
-        setFavorito(recebeFavorito);
-        console.log(recebeFavorito);
-    }
-
-    return (
-        <ion-icon onClick={favoritarPost} name={favorito ? "bookmark-sharp" : "bookmark-outline"}></ion-icon>
-    )
-}
-
-
-
-function inverteValores(valorAtual){
-    return !valorAtual;
-} */
